@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'labels.dart';
 
 class Inputs {
-
   //Titulo inputs
   //Utilizado en:
   //-SignUp
@@ -121,10 +120,9 @@ class Inputs {
                   disabledBorder: InputBorder.none,
                   icon: Icon(
                     Icons.search,
-                    color: kGreyColour,
+                    color: kBlueColour,
                   ),
                   hintText: text,
-
                 ),
               ),
             ),
