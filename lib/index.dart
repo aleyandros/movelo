@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movelo/prueba.dart';
 
 class Index extends StatefulWidget {
+  final LatLng fromPoint = LatLng(4.74203, -74.06652);
   static final id = "index";
   @override
   _IndexState createState() => _IndexState();
@@ -25,7 +26,7 @@ class _IndexState extends State<Index> {
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(4.74203, -74.06652),
-    zoom: 15,
+    zoom: 16,
   );
 
   static final CameraPosition _kLake = CameraPosition(
@@ -110,8 +111,11 @@ class _IndexState extends State<Index> {
           child: Stack(
             children: <Widget>[
               GoogleMap(
+                markers: _createMarkers(),
                 mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
+                myLocationEnabled: true,
+                myLocationButtonEnabled: true,
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },
@@ -173,5 +177,13 @@ class _IndexState extends State<Index> {
   Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  }
+
+  Set<Marker> _createMarkers() {
+    var tmp = Set<Marker>();
+
+    tmp.add(
+        Marker(markerId: MarkerId("fromPoint"), position: widget.fromPoint));
+    return tmp;
   }
 }
