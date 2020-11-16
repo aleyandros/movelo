@@ -1,61 +1,101 @@
-import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+import 'DirectionProvider.dart';
 
-class MyApp extends StatelessWidget {
+class DeliveryScreen extends StatefulWidget {
+  final LatLng fromPoint = LatLng(-38.956176, -67.920666);
+  final LatLng toPoint = LatLng(-38.953724, -67.923921);
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Google Maps Demo',
-      home: MapSample(),
-    );
-  }
-}
-//
-//
-//
-
-class MapSample extends StatefulWidget {
-  @override
-  State<MapSample> createState() => MapSampleState();
+  _DeliveryScreenState createState() => _DeliveryScreenState();
 }
 
-class MapSampleState extends State<MapSample> {
-  Completer<GoogleMapController> _controller = Completer();
-
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-
-  static final CameraPosition _kLake = CameraPosition(
-    target: LatLng(37.43296265331129, -122.08832357078792),
-    zoom: 14.4746,
-  );
+class _DeliveryScreenState extends State<DeliveryScreen> {
+  GoogleMapController _mapController;
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Fasty - Delivery'),
+      ),
+      body: Consumer<DirectionProvider>(
+        builder: (BuildContext context, DirectionProvider api, Widget child) {
+          return GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: widget.fromPoint,
+              zoom: 12,
+            ),
+            markers: _createMarkers(),
+            polylines: api.currentRoute,
+            onMapCreated: _onMapCreated,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+          );
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.zoom_out_map),
+        onPressed: _centerView,
       ),
     );
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.moveCamera(CameraUpdate.newCameraPosition(_kLake));
+  Set<Marker> _createMarkers() {
+    var tmp = Set<Marker>();
+
+    tmp.add(
+      Marker(
+        markerId: MarkerId("fromPoint"),
+        position: widget.fromPoint,
+        infoWindow: InfoWindow(title: "Pizzeria"),
+      ),
+    );
+    tmp.add(
+      Marker(
+        markerId: MarkerId("toPoint"),
+        position: widget.toPoint,
+        infoWindow: InfoWindow(title: "Roca 123"),
+      ),
+    );
+    return tmp;
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+
+    _centerView();
+  }
+
+  _centerView() async {
+    var api = Provider.of<DirectionProvider>(context);
+
+    await _mapController.getVisibleRegion();
+
+    print("buscando direcciones");
+    await api.findDirections(widget.fromPoint, widget.toPoint);
+
+    var left = min(widget.fromPoint.latitude, widget.toPoint.latitude);
+    var right = max(widget.fromPoint.latitude, widget.toPoint.latitude);
+    var top = max(widget.fromPoint.longitude, widget.toPoint.longitude);
+    var bottom = min(widget.fromPoint.longitude, widget.toPoint.longitude);
+
+    api.currentRoute.first.points.forEach((point) {
+      left = min(left, point.latitude);
+      right = max(right, point.latitude);
+      top = max(top, point.longitude);
+      bottom = min(bottom, point.longitude);
+    });
+
+    var bounds = LatLngBounds(
+      southwest: LatLng(left, bottom),
+      northeast: LatLng(right, top),
+    );
+    var cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 50);
+    _mapController.animateCamera(cameraUpdate);
   }
 }
