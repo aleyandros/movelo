@@ -10,8 +10,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movelo/prueba.dart';
 
+final double xorigin = 4.74203;
+final double yorigin = -74.06652;
+final double xend = 4.8615787;
+final double yend = -74.0347255;
+
 class Index extends StatefulWidget {
-  final LatLng fromPoint = LatLng(4.74203, -74.06652);
+  final LatLng fromPoint = LatLng(xorigin, yorigin);
+  final LatLng toPoint = LatLng(xend, yend);
   static final id = "index";
   @override
   _IndexState createState() => _IndexState();
@@ -25,15 +31,12 @@ class _IndexState extends State<Index> {
   MapSample ms = MapSample();
 
   static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(4.74203, -74.06652),
+    target: LatLng(xorigin, yorigin),
     zoom: 16,
   );
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(4.8615787, -74.0347255),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  static final CameraPosition _kLake =
+      CameraPosition(target: LatLng(xend, yend), zoom: 16);
 
   @override
   Widget build(BuildContext context) {
@@ -184,6 +187,7 @@ class _IndexState extends State<Index> {
 
     tmp.add(
         Marker(markerId: MarkerId("fromPoint"), position: widget.fromPoint));
+    tmp.add(Marker(markerId: MarkerId("toPoint"), position: widget.toPoint));
     return tmp;
   }
 }
