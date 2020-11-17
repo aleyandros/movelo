@@ -5,6 +5,7 @@ import 'package:movelo/index.dart';
 import 'package:movelo/login.dart';
 import 'package:movelo/signup.dart';
 import 'DirectionProvider.dart';
+import 'package:movelo/panico.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
           Login.id: (context) => Login(),
           Signup.id: (context) => Signup(),
           Index.id: (context) => Index(),
+          Panico.id: (context) => Panico(),
         },
       ),
     );

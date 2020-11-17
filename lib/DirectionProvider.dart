@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as maps;
 import 'package:google_maps_webservice/directions.dart';
+import 'package:movelo/Constants/labels.dart';
 
 class DirectionProvider extends ChangeNotifier {
   GoogleMapsDirections directionsApi =
@@ -36,7 +37,7 @@ class DirectionProvider extends ChangeNotifier {
       var line = maps.Polyline(
         points: points,
         polylineId: maps.PolylineId("mejor ruta"),
-        color: Colors.red,
+        color: kRedColour,
         width: 4,
       );
       newRoute.add(line);

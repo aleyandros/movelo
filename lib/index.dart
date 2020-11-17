@@ -44,8 +44,8 @@ class _IndexState extends State<Index> {
         ),
         actions: <Widget>[
           but.smallButton(
-            icon: FontAwesomeIcons.phoneAlt,
-            color: kWhiteColour,
+            icon: FontAwesomeIcons.exclamationTriangle,
+            color: kRedColour,
           )
         ],
       ),
@@ -165,11 +165,6 @@ class _IndexState extends State<Index> {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: kGreyColour,
-        child: Icon(Icons.zoom_out_map),
-        onPressed: _centerView,
       ),
     );
   }
