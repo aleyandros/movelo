@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       builder: (_) => DirectionProvider(),
       child: MaterialApp(
-        initialRoute: Login.id,
+        initialRoute: Index.id,
         routes: {
           Login.id: (context) => Login(),
           Signup.id: (context) => Signup(),

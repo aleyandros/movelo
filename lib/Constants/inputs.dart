@@ -48,7 +48,7 @@ class Inputs {
         hintText: "$description",
         suffixIcon: Icon(
           icon,
-          color: kDarkerBlueColour,
+          color: kYellowColor,
         ),
       ),
       validator: validate,

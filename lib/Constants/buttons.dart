@@ -20,14 +20,14 @@ class Buttons {
       width: _width,
       height: _height,
       child: RaisedButton(
-        color: kYellowColour,
+        color: kBlueColour,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
         onPressed: onPress,
         child: Text(
           '$text'.toUpperCase(),
-          style: kLabelButtonBlue,
+          style: kLabelButtonWhite,
         ),
       ),
     );

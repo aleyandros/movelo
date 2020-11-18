@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-const kYellowColour = Color(0xFF09EF81);
+const kGreenColour = Color(0xFF09EF81);
 const kBlueColour = Color(0xFF0E244B);
 const kWhiteColour = Color(0xFFFFFFFF);
 const kGreyColour = Color(0xFFB1B1B1);
 const kBlackColour = Color(0xFF000000);
 const kRedColour = Color(0xFFCF181B);
-const kDarkerBlueColour = Color(0xFF0070A3);
+const kYellowColor = Color(0xFFFDDB3A);
 
 const kUpGrid = 4;
 const kCenterUpGrid = 1;
@@ -14,10 +14,16 @@ const kCenterBottomGrid = 36;
 const kBottomGrid = 6;
 
 //Logo Upper Menu Hamburguesa
-const kLabelUpperYellow = TextStyle(
+const kLabelMoveloGreen = TextStyle(
   fontSize: 36.0,
-  color: kYellowColour,
+  color: kGreenColour,
   fontFamily: 'Pacifico-Regular',
+);
+
+const kLabelTitleYellow = TextStyle(
+  fontSize: 25.0,
+  color: kYellowColor,
+  fontFamily: 'Montserrat-SemiBold',
 );
 
 const kLabelTitleWhite = TextStyle(

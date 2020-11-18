@@ -8,6 +8,7 @@ import 'package:movelo/Constants/buttons.dart';
 import 'package:movelo/Constants/grid.dart';
 import 'package:movelo/Constants/labels.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:movelo/panico.dart';
 
 import 'DirectionProvider.dart';
 
@@ -44,8 +45,8 @@ class _IndexState extends State<Index> {
         ),
         actions: <Widget>[
           but.smallButton(
-            icon: FontAwesomeIcons.exclamationTriangle,
-            color: kRedColour,
+            icon: FontAwesomeIcons.seedling,
+            color: kGreenColour,
           )
         ],
       ),
@@ -59,7 +60,7 @@ class _IndexState extends State<Index> {
                 child: Center(
                   child: Text(
                     "Movelo",
-                    style: kLabelUpperYellow,
+                    style: kLabelMoveloGreen,
                   ),
                 ),
               ),
@@ -97,6 +98,17 @@ class _IndexState extends State<Index> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: kRedColour,
+        child: Icon(
+          Icons.report_problem,
+          color: kYellowColor,
+          size: 30,
+        ),
+        onPressed: () {
+          Navigator.pushNamed(context, Panico.id);
+        },
+      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -109,6 +121,7 @@ class _IndexState extends State<Index> {
                     zoom: 12,
                   ),
                   markers: _createMarkers(),
+                  zoomControlsEnabled: false,
                   polylines: api.currentRoute,
                   onMapCreated: _onMapCreated,
                   myLocationEnabled: true,
@@ -125,15 +138,15 @@ class _IndexState extends State<Index> {
               ),
             ),
             Positioned(
-              bottom: 30,
+              bottom: 15,
               left: 20,
               child: Row(
                 children: [
                   SizedBox(
-                    width: 150,
+                    width: 130,
                     height: 50,
                     child: RaisedButton(
-                      color: kYellowColour,
+                      color: kGreenColour,
                       shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(15.0)),
                       child: Text(
@@ -147,7 +160,7 @@ class _IndexState extends State<Index> {
                     width: 20,
                   ),
                   SizedBox(
-                    width: 150,
+                    width: 130,
                     height: 50,
                     child: RaisedButton(
                       color: kBlueColour,
