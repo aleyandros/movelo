@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:movelo/plants.dart';
 import 'package:provider/provider.dart';
 import 'package:movelo/Constants/inputs.dart';
 import 'package:movelo/Constants/buttons.dart';
@@ -45,9 +46,11 @@ class _IndexState extends State<Index> {
         ),
         actions: <Widget>[
           but.smallButton(
-            icon: FontAwesomeIcons.seedling,
-            color: kGreenColour,
-          )
+              icon: FontAwesomeIcons.seedling,
+              color: kGreenColour,
+              navigation: () {
+                Navigator.pushNamed(context, Plants.id);
+              })
         ],
       ),
       drawer: Drawer(
@@ -187,6 +190,7 @@ class _IndexState extends State<Index> {
 
     tmp.add(
       Marker(
+        visible: false,
         markerId: MarkerId("fromPoint"),
         position: widget.fromPoint,
         infoWindow: InfoWindow(title: "Casa"),

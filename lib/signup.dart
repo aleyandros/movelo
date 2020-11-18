@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:movelo/Constants/buttons.dart';
 import 'package:movelo/login.dart';
 import 'package:movelo/index.dart';
-//import 'package:upper/Screens/verification.dart';
 import 'package:movelo/Constants/labels.dart';
 import 'package:movelo/Constants/inputs.dart';
 

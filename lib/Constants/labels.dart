@@ -7,6 +7,7 @@ const kGreyColour = Color(0xFFB1B1B1);
 const kBlackColour = Color(0xFF000000);
 const kRedColour = Color(0xFFCF181B);
 const kYellowColor = Color(0xFFFDDB3A);
+const kGreenTreeColor = Color(0xFF5B892D);
 
 const kUpGrid = 4;
 const kCenterUpGrid = 1;
@@ -20,9 +21,21 @@ const kLabelMoveloGreen = TextStyle(
   fontFamily: 'Pacifico-Regular',
 );
 
+const kLabelMoveloGreenTree = TextStyle(
+  fontSize: 36.0,
+  color: kGreenTreeColor,
+  fontFamily: 'Pacifico-Regular',
+);
+
 const kLabelTitleYellow = TextStyle(
   fontSize: 25.0,
   color: kYellowColor,
+  fontFamily: 'Montserrat-SemiBold',
+);
+
+const kLabelGreenTree = TextStyle(
+  fontSize: 25.0,
+  color: kGreenTreeColor,
   fontFamily: 'Montserrat-SemiBold',
 );
 

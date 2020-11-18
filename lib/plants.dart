@@ -12,8 +12,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'DirectionProvider.dart';
 
-class Panico extends StatefulWidget {
-  static final id = "panico";
+class Plants extends StatefulWidget {
+  static final id = "plants";
   final LatLng fromPoint = LatLng(4.74203, -74.06652);
   final LatLng toPoint = LatLng(4.8615787, -74.0347255);
 
@@ -21,7 +21,7 @@ class Panico extends StatefulWidget {
   _IndexState createState() => _IndexState();
 }
 
-class _IndexState extends State<Panico> {
+class _IndexState extends State<Plants> {
   GoogleMapController _mapController;
   Inputs inp = Inputs();
   Buttons but = Buttons();
@@ -30,7 +30,7 @@ class _IndexState extends State<Panico> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kRedColour,
+      backgroundColor: kWhiteColour,
       appBar: AppBar(
         backgroundColor: kBlueColour,
         leading: but.smallButton(
@@ -40,12 +40,6 @@ class _IndexState extends State<Panico> {
             Navigator.pushNamed(context, Index.id);
           },
         ),
-        actions: <Widget>[
-          but.smallButton(
-            icon: Icons.grass,
-            color: kGreenColour,
-          )
-        ],
       ),
       body: SafeArea(
         child: Center(
@@ -54,30 +48,17 @@ class _IndexState extends State<Panico> {
             children: [
               Container(
                 child: Text(
-                  "La ayuda está en camino",
-                  style: kLabelTitleYellow,
+                  "Felicidades",
+                  style: kLabelMoveloGreenTree,
                 ),
               ),
-              Icon(
-                Icons.report_problem,
-                color: kYellowColor,
-                size: 250,
-              ),
-              but.biggestButton(
-                text: "Es solo un problema mecánico",
-                onPress: () {
-                  Navigator.pushNamed(context, Index.id);
-                },
-              ),
-              FlatButton(
+              Container(
                 child: Text(
-                  'Cancelar',
-                  style: kLabelUnderlineWhite,
+                  "Has sembrado 15 arboles\n",
+                  style: kLabelGreenTree,
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
               ),
+              Image(image: AssetImage('images/bosque.png')),
             ],
           ),
         ),
