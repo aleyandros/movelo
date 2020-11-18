@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:address_search_text_field/address_search_text_field.dart';
 import 'labels.dart';
 
 class Inputs {
@@ -112,18 +113,12 @@ class Inputs {
                     ),
                   ]),
               height: 40,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                  icon: Icon(
-                    Icons.search,
-                    color: kBlueColour,
-                  ),
-                  hintText: text,
-                ),
+              child: AddressSearchTextField(
+                country: "Colombia",
+                onDone: (AddressPoint point) {
+                  print(point.latitude);
+                  print(point.longitude);
+                },
               ),
             ),
           ),

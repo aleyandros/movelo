@@ -12,11 +12,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movelo/panico.dart';
 import 'package:address_search_text_field/address_search_text_field.dart';
 import 'package:geolocator/geolocator.dart';
-
+import 'package:movelo/index.dart';
 import 'DirectionProvider.dart';
 
-class Index extends StatefulWidget {
-  static final id = "index";
+class Map extends StatefulWidget {
+  static final id = "map";
+  final Index ind = Index();
   final LatLng fromPoint = LatLng(4.74203, -74.06652);
   final LatLng toPoint = LatLng(4.8615787, -74.0347255);
 
@@ -24,7 +25,7 @@ class Index extends StatefulWidget {
   _IndexState createState() => _IndexState();
 }
 
-class _IndexState extends State<Index> {
+class _IndexState extends State<Map> {
   GoogleMapController _mapController;
   Inputs inp = Inputs();
   Buttons but = Buttons();
@@ -43,17 +44,12 @@ class _IndexState extends State<Index> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBlueColour,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return but.smallButton(
-              icon: FontAwesomeIcons.bars,
-              color: kWhiteColour,
-              navigation: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
-        ),
+        leading: but.smallButton(
+            icon: Icons.arrow_back_ios,
+            color: kWhiteColour,
+            navigation: () {
+              Navigator.pushNamed(context, Index.id);
+            }),
         actions: <Widget>[
           but.smallButton(
               icon: FontAwesomeIcons.seedling,
@@ -65,54 +61,6 @@ class _IndexState extends State<Index> {
                 print(lon);
               })
         ],
-      ),
-      drawer: Drawer(
-        child: Container(
-          color: kBlueColour,
-          child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            children: <Widget>[
-              DrawerHeader(
-                child: Center(
-                  child: Text(
-                    "Movelo",
-                    style: kLabelMoveloGreen,
-                  ),
-                ),
-              ),
-              but.elementDrawer(
-                icon: FontAwesomeIcons.userAlt,
-                color: kWhiteColour,
-                text: "Mi perfil",
-                navigator: () {},
-              ),
-              but.elementDrawer(
-                icon: FontAwesomeIcons.bicycle,
-                color: kWhiteColour,
-                text: "Bicicletas",
-                navigator: null,
-              ),
-              but.elementDrawer(
-                icon: FontAwesomeIcons.thumbtack,
-                color: kWhiteColour,
-                text: "Ubicación",
-                navigator: null,
-              ),
-              but.elementDrawer(
-                icon: FontAwesomeIcons.question,
-                color: kWhiteColour,
-                text: "Ayuda",
-                navigator: null,
-              ),
-              but.elementDrawer(
-                icon: FontAwesomeIcons.signOutAlt,
-                color: kWhiteColour,
-                text: "Cerrar sesión",
-                navigator: () {},
-              ),
-            ],
-          ),
-        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: kRedColour,
@@ -144,59 +92,6 @@ class _IndexState extends State<Index> {
                   myLocationButtonEnabled: true,
                 );
               },
-            ),
-            Positioned(
-                child: Container(
-              color: kWhiteColour,
-              child: AddressSearchTextField(
-                  country: "Colombia",
-                  hintText: "A donde vamos?",
-                  onDone: (AddressPoint point) {
-                    print(point.latitude);
-                    print(point.longitude);
-
-                    Navigator.of(context).pop();
-                  },
-                  noResultsText: "null"),
-            )),
-            Positioned(
-              bottom: 15,
-              left: 20,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 130,
-                    height: 50,
-                    child: RaisedButton(
-                      color: kGreenColour,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(15.0)),
-                      child: Text(
-                        'CASA',
-                        style: kLabelButtonBlue,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  SizedBox(
-                    width: 130,
-                    height: 50,
-                    child: RaisedButton(
-                      color: kBlueColour,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(15.0)),
-                      child: Text(
-                        'TRABAJO',
-                        style: kLabelButtonWhite,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
             ),
           ],
         ),

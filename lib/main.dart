@@ -7,6 +7,7 @@ import 'package:movelo/signup.dart';
 import 'DirectionProvider.dart';
 import 'package:movelo/panico.dart';
 import 'package:movelo/plants.dart';
+import 'package:movelo/map.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,13 +17,14 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       builder: (_) => DirectionProvider(),
       child: MaterialApp(
-        initialRoute: Index.id,
+        initialRoute: Map.id,
         routes: {
           Login.id: (context) => Login(),
           Signup.id: (context) => Signup(),
           Index.id: (context) => Index(),
           Panico.id: (context) => Panico(),
           Plants.id: (context) => Plants(),
+          Map.id: (context) => Map(),
         },
       ),
     );
