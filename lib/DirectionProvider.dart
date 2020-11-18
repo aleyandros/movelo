@@ -18,7 +18,7 @@ class DirectionProvider extends ChangeNotifier {
     var result = await directionsApi.directionsWithLocation(
       origin,
       destination,
-      travelMode: TravelMode.driving,
+      travelMode: TravelMode.walking,
     );
 
     Set<maps.Polyline> newRoute = Set();

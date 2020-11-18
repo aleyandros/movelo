@@ -16,10 +16,10 @@ import 'package:movelo/index.dart';
 import 'DirectionProvider.dart';
 
 class Map extends StatefulWidget {
+  Map({@required this.fromPoint, @required this.toPoint});
   static final id = "map";
-  final Index ind = Index();
-  final LatLng fromPoint = LatLng(4.74203, -74.06652);
-  final LatLng toPoint = LatLng(4.8615787, -74.0347255);
+  final LatLng fromPoint;
+  final LatLng toPoint;
 
   @override
   _IndexState createState() => _IndexState();
@@ -27,6 +27,7 @@ class Map extends StatefulWidget {
 
 class _IndexState extends State<Map> {
   GoogleMapController _mapController;
+  Index ind = Index();
   Inputs inp = Inputs();
   Buttons but = Buttons();
   Grid grid = Grid();
@@ -150,7 +151,7 @@ class _IndexState extends State<Map> {
       southwest: LatLng(left, bottom),
       northeast: LatLng(right, top),
     );
-    var cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 150);
+    var cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 50);
     _mapController.animateCamera(cameraUpdate);
   }
 }
